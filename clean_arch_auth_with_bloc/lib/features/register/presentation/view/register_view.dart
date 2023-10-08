@@ -1,5 +1,4 @@
 import 'package:clean_arch_auth_with_bloc/core/bloc/bloc_state.dart';
-import 'package:clean_arch_auth_with_bloc/features/register/domain/repositories/register_repository.dart';
 import 'package:clean_arch_auth_with_bloc/features/register/domain/usecases/signup_usecase_impl.dart';
 import 'package:clean_arch_auth_with_bloc/features/register/presentation/view/register_view_loading_state.dart';
 import 'package:clean_arch_auth_with_bloc/features/register/presentation/view/register_view_stable_state.dart';

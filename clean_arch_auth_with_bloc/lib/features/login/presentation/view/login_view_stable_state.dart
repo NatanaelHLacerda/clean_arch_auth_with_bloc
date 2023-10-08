@@ -1,18 +1,16 @@
-import 'package:clean_arch_auth_with_bloc/features/register/presentation/bloc/register_event.dart';
+import 'package:clean_arch_auth_with_bloc/features/login/presentation/bloc/login_bloc.dart';
+import 'package:clean_arch_auth_with_bloc/features/login/presentation/bloc/login_event.dart';
 import 'package:flutter/material.dart';
 
-import '../bloc/register_bloc.dart';
-
-class RegisterViewStableState extends StatefulWidget {
-  final RegisterBloc bloc;
-  const RegisterViewStableState({required this.bloc, super.key});
+class LoginViewStableState extends StatefulWidget {
+  final LoginBloc bloc;
+  const LoginViewStableState({required this.bloc, super.key});
 
   @override
-  State<RegisterViewStableState> createState() =>
-      _RegisterViewStableStateState();
+  State<LoginViewStableState> createState() => _LoginViewStableStateState();
 }
 
-class _RegisterViewStableStateState extends State<RegisterViewStableState> {
+class _LoginViewStableStateState extends State<LoginViewStableState> {
   late TextEditingController emailController;
   late TextEditingController passwordController;
 
@@ -20,7 +18,6 @@ class _RegisterViewStableStateState extends State<RegisterViewStableState> {
   void initState() {
     emailController = TextEditingController();
     passwordController = TextEditingController();
-
     super.initState();
   }
 
@@ -41,15 +38,16 @@ class _RegisterViewStableStateState extends State<RegisterViewStableState> {
             ),
             ElevatedButton(
                 onPressed: () {
-                  widget.bloc.dispatchEvent(SignUpEvent(
-                      email: emailController.text,
-                      password: passwordController.text,
-                      context: context));
+                  widget.bloc.dispatchEvent(SignInEvent(
+                    emailController.text,
+                    passwordController.text,
+                    context,
+                  ));
                 },
-                child: const Text('registrar-se')),
-            TextButton(onPressed: () {
-              widget.bloc.dispatchEvent(RegisterEventNavigatePop(context));
-            }, child: const Text('Faça Login'))
+                child: const Text('Logar')),
+            TextButton(onPressed: (){
+              widget.bloc.dispatchEvent(LoginEventNavigatePush(context));
+            }, child: const Text('Cadastre-se'))
           ],
         ),
       ),

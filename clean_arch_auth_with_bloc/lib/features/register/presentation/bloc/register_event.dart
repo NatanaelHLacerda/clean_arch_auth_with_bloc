@@ -13,3 +13,9 @@ class SignUpEvent implements RegisterEvent {
 
   SignUpEvent({required this.email, required this.password, required this.context});
 }
+
+class RegisterEventNavigatePop implements RegisterEvent {
+  BuildContext context;
+
+  RegisterEventNavigatePop(this.context);
+}

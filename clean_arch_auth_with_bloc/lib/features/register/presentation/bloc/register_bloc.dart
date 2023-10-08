@@ -17,6 +17,8 @@ class RegisterBloc extends Bloc {
       _handleOnReady();
     } else if (event is SignUpEvent) {
       _handleSignUp(event.email, event.password, event.context);
+    } else if (event is RegisterEventNavigatePop) {
+      _handleNavigatePop(event.context);
     }
   }
 
@@ -24,16 +26,18 @@ class RegisterBloc extends Bloc {
     dispatchState(BlocStableState(data: null));
   }
 
-  _handleSignUp(String email, String password, BuildContext context) async {
-  
+  _handleSignUp(String email, String password, context) async {
     try {
       final result = await signUp.signUp(email, password);
-
-      ScaffoldMessenger.of(context)
-          .showSnackBar(SnackBar(content: Text('Usuario Criado Com sucesso')));
+      ScaffoldMessenger.of(context).showSnackBar(
+          const SnackBar(content: Text('Usuario Criado Com sucesso')));
     } on Exception catch (e) {
       ScaffoldMessenger.of(context).showSnackBar(
           SnackBar(content: Text('Erro ao criar o usuario ${e.toString()}')));
     }
+  }
+
+  _handleNavigatePop(BuildContext context) {
+    Navigator.pop(context);
   }
 }

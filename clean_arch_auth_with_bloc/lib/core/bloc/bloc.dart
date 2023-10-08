@@ -1,10 +1,8 @@
 import 'dart:async';
-
 import 'package:clean_arch_auth_with_bloc/core/bloc/bloc_state.dart';
 import 'package:clean_arch_auth_with_bloc/core/bloc/event.dart';
 
-
-abstract class Bloc{
+abstract class Bloc {
   late StreamController<BlocState> _state;
   Stream<BlocState> get state => _state.stream;
 
@@ -22,7 +20,7 @@ abstract class Bloc{
     _state.add(state);
   }
 
-  dispatchEvent(Event event){
+  dispatchEvent(Event event) {
     _event.add(event);
   }
 

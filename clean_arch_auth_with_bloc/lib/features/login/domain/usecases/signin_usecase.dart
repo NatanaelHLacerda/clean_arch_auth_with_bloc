@@ -1,3 +1,3 @@
-abstract class LoginRepository {
+abstract class SignInUseCase {
   signIn(String email, String password);
 }
