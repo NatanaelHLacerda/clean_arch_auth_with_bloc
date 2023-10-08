@@ -9,11 +9,13 @@ class SignInEvent implements LoginEvent {
   final String email;
   final String password;
   final BuildContext context;
+  final GlobalKey<FormState> key;
 
   SignInEvent(
     this.email,
     this.password,
     this.context,
+    this.key,
   );
 }
 

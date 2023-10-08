@@ -9,9 +9,10 @@ class SignUpEvent implements RegisterEvent {
   final String email;
   final String password;
   final BuildContext context;
+  final GlobalKey<FormState> key;
 
 
-  SignUpEvent({required this.email, required this.password, required this.context});
+  SignUpEvent({required this.email, required this.password, required this.context, required this.key});
 }
 
 class RegisterEventNavigatePop implements RegisterEvent {

@@ -1,4 +1,5 @@
 import 'package:clean_arch_auth_with_bloc/core/bloc/bloc_state.dart';
+import 'package:clean_arch_auth_with_bloc/core/utils/string_translator.dart';
 import 'package:clean_arch_auth_with_bloc/features/register/presentation/bloc/register_event.dart';
 import 'package:flutter/material.dart';
 
@@ -16,7 +17,7 @@ class RegisterBloc extends Bloc {
     if (event is OnReadyEvent) {
       _handleOnReady();
     } else if (event is SignUpEvent) {
-      _handleSignUp(event.email, event.password, event.context);
+      _handleSignUp(event.email, event.password, event.context, event.key);
     } else if (event is RegisterEventNavigatePop) {
       _handleNavigatePop(event.context);
     }
@@ -26,14 +27,18 @@ class RegisterBloc extends Bloc {
     dispatchState(BlocStableState(data: null));
   }
 
-  _handleSignUp(String email, String password, context) async {
-    try {
-      final result = await signUp.signUp(email, password);
-      ScaffoldMessenger.of(context).showSnackBar(
-          const SnackBar(content: Text('Usuario Criado Com sucesso')));
-    } on Exception catch (e) {
-      ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(content: Text('Erro ao criar o usuario ${e.toString()}')));
+  _handleSignUp(
+      String email, String password, context, GlobalKey<FormState> key) async {
+    if (key.currentState?.validate() ?? false) {
+      try {
+        final result = await signUp.signUp(email, password);
+        ScaffoldMessenger.of(context).showSnackBar(
+            const SnackBar(content: Text('Usuario Criado Com sucesso')));
+      } on Exception catch (e) {
+        print(e.toString());
+        ScaffoldMessenger.of(context).showSnackBar(
+            SnackBar(content: Text(StringTranslator.build(e.toString()))));
+      }
     }
   }
 
