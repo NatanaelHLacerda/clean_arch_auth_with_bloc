@@ -74,7 +74,7 @@ class _LoginViewStableStateState extends State<LoginViewStableState> {
               ),
               TextButton(
                   onPressed: () {
-                    widget.bloc.dispatchEvent(LoginEventNavigatePush(context));
+                    widget.bloc.dispatchEvent(LoginEventNavigate(context));
                   },
                   child: const Text('Cadastre-se'))
             ],

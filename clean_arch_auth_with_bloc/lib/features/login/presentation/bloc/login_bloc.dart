@@ -17,7 +17,7 @@ class LoginBloc extends Bloc {
       _handleOnReady();
     } else if (event is SignInEvent) {
       _handleSignIn(event.email, event.password, event.context, event.key);
-    } else if (event is LoginEventNavigatePush) {
+    } else if (event is LoginEventNavigate) {
       _handleNavigatePush(event.context);
     }
   }
@@ -26,20 +26,20 @@ class LoginBloc extends Bloc {
     dispatchState(BlocStableState(data: null));
   }
 
-  _handleSignIn(String email, String password, context, GlobalKey<FormState> key) async {
+  _handleSignIn(
+      String email, String password, context, GlobalKey<FormState> key) async {
     if (key.currentState?.validate() ?? false) {
       try {
-      final result = await signIn.signIn(email, password);
-      ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(
-          content: Text('Usuario logado com sucesso'),
-        ),
-      );
-    } on Exception catch (e) {
-      print(e.toString());
-      ScaffoldMessenger.of(context)
-          .showSnackBar(SnackBar(content: Text(StringTranslator.build(e.toString()))));
-    }
+        final result = await signIn.signIn(email, password);
+        ScaffoldMessenger.of(context).showSnackBar(
+          const SnackBar(
+            content: Text('Usuario logado com sucesso'),
+          ),
+        );
+      } on Exception catch (e) {
+        ScaffoldMessenger.of(context).showSnackBar(
+            SnackBar(content: Text(StringTranslator.build(e.toString()))));
+      }
     }
   }
 

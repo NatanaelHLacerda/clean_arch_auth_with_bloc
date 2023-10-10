@@ -19,8 +19,8 @@ class SignInEvent implements LoginEvent {
   );
 }
 
-class LoginEventNavigatePush implements LoginEvent {
+class LoginEventNavigate implements LoginEvent {
   final BuildContext context;
 
-  LoginEventNavigatePush(this.context);
+  LoginEventNavigate(this.context);
 }
